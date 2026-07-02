@@ -1,0 +1,137 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0;background:#04091c}
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+/* Optional — make the report fill the widget edge-to-edge.
+   Change widget-1 to YOUR widget number (shown in this CSS box hint, e.g. #widget-49). */
+#widget-1.widget{padding:0 !important;background:#04091c !important;overflow:hidden !important}
+#lfgr-report{position:relative;overflow:hidden;isolation:isolate;--panel:rgba(12,28,58,.60);--line:rgba(120,160,230,.22);--soft:#c7d6ee;--dim:#8ea3c6;--good:#41dba6;--amber:#ffc960;--blue:#5db0ff;
+ font-family:'IBM Plex Sans',system-ui,sans-serif;color:#e4ecfa;line-height:1.4;position:relative;border-radius:12px;overflow:hidden;padding:0 0 34px;
+ background:#04091c;}
+#lfgr-report *{box-sizing:border-box}
+#lfgr-report .rpt-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;pointer-events:none}
+#lfgr-report .rpt-hdr{position:relative;height:118px;display:flex;align-items:center;justify-content:center}
+#lfgr-report .rpt-hdr .logo{width:270px;max-width:56%;height:auto;display:block}
+#lfgr-report .rpt-hdr .atom{position:absolute;top:16px;right:5%;width:74px;height:auto;opacity:.9}
+#lfgr-report .wrap{max-width:1080px;margin:0 auto;padding:0 30px;position:relative}
+#lfgr-report .rpt-title{font-family:'Fraunces',serif;font-weight:600;font-size:30px;text-align:center;color:#fff;margin:2px 0 4px}
+#lfgr-report .divider{width:60px;height:3px;border-radius:2px;background:var(--blue);margin:8px auto 16px;opacity:.85}
+#lfgr-report .rpt-meta{display:flex;gap:34px;flex-wrap:wrap;justify-content:center;margin-bottom:26px}
+#lfgr-report .rpt-meta>div{text-align:center}
+#lfgr-report .rpt-meta .mlab{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim);margin-bottom:3px}
+#lfgr-report .rpt-meta .mval{font-size:14px;font-weight:600;color:#fff}
+#lfgr-report .summary,#lfgr-report .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;backdrop-filter:blur(3px)}
+#lfgr-report .summary{padding:20px 24px;margin-bottom:22px}
+#lfgr-report .summary h2{font-family:'Fraunces',serif;font-size:19px;color:#fff;font-weight:600;margin:0 0 11px}
+#lfgr-report .summary p{font-size:13px;color:var(--soft);margin:0 0 10px;line-height:1.62}
+#lfgr-report .summary p:last-child{margin-bottom:0}
+#lfgr-report .summary b{color:#fff;font-weight:600}
+#lfgr-report .good{color:var(--good);font-weight:600}#lfgr-report .watch{color:var(--amber);font-weight:600}
+#lfgr-report .charts{display:grid;grid-template-columns:1.05fr 1fr;gap:16px;margin-bottom:26px}
+#lfgr-report .card{padding:16px 20px}
+#lfgr-report .ctitle{font-size:15px;font-weight:600;color:#fff;margin-bottom:3px}
+#lfgr-report .cnote{font-size:11.5px;color:var(--dim);margin-bottom:14px}
+#lfgr-report .pierow{display:flex;align-items:center;gap:16px}
+#lfgr-report .piewrap{flex:0 0 150px;width:150px}
+#lfgr-report .legend{flex:1;display:flex;flex-direction:column;gap:9px;min-width:0}
+#lfgr-report .lgrow{display:flex;align-items:center;gap:9px;font-size:13px}
+#lfgr-report .sw{flex:0 0 13px;width:13px;height:13px;border-radius:3px}
+#lfgr-report .ll{color:var(--soft);flex:1}
+#lfgr-report .lv{font-weight:600;color:#fff;font-variant-numeric:tabular-nums}
+#lfgr-report .frow{display:flex;align-items:center;gap:12px;margin-bottom:9px}
+#lfgr-report .frow:last-child{margin-bottom:0}
+#lfgr-report .fname{flex:0 0 96px;font-size:12.5px;color:var(--soft)}
+#lfgr-report .fbarwrap{flex:1;height:15px;background:rgba(120,160,230,.10);border-radius:5px;overflow:hidden}
+#lfgr-report .fbar{display:block;height:100%;border-radius:5px}
+#lfgr-report .fval{flex:0 0 46px;text-align:right;font-size:13px;font-weight:600;color:#fff;font-variant-numeric:tabular-nums}
+#lfgr-report .fpending{flex:1;text-align:right;font-size:11.5px;font-style:italic;color:var(--dim)}
+#lfgr-report .sec{display:flex;align-items:center;gap:12px;margin:26px 0 4px}
+#lfgr-report .sec h3{font-family:'Fraunces',serif;font-weight:600;font-size:20px;color:#fff;margin:0}
+#lfgr-report .sec .tag{font-size:11px;font-weight:600;color:var(--amber);border:1px solid rgba(255,201,96,.4);background:rgba(255,201,96,.08);padding:3px 10px;border-radius:20px;white-space:nowrap}
+#lfgr-report .sec .r{flex:1;height:1px;background:var(--line)}
+#lfgr-report .subnote{font-size:11.5px;color:var(--dim);margin:0 0 14px;line-height:1.5;max-width:none}
+#lfgr-report .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+#lfgr-report .kpi{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:9px;padding:13px 15px;min-height:118px;display:flex;flex-direction:column}
+#lfgr-report .kname{font-size:12.5px;font-weight:600;color:#fff}
+#lfgr-report .ksub{font-size:10.5px;color:var(--dim);margin:2px 0 8px;line-height:1.35}
+#lfgr-report .kval{font-family:'Fraunces',serif;font-size:30px;font-weight:600;color:#fff;margin-top:auto}
+#lfgr-report .kval-msp{font-size:13px;font-weight:600;color:var(--amber);margin-top:auto;line-height:1.35}
+#lfgr-report .kdelta{font-size:11px;font-weight:600;margin-top:6px;color:var(--soft)}
+#lfgr-report .kdelta.good{color:var(--good)}#lfgr-report .kdelta.neutral{color:var(--dim)}
+#lfgr-report .knorm{color:var(--dim);font-weight:500}
+#lfgr-report .rpt-foot{max-width:1080px;margin:30px auto 0;padding:14px 30px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:11px;color:var(--dim)}
+@media(max-width:860px){#lfgr-report .charts{grid-template-columns:1fr}#lfgr-report .grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){#lfgr-report .grid{grid-template-columns:1fr}#lfgr-report .rpt-hdr .logo{max-width:74%}}
+
+/* inline-style replacements (widget strips inline styles) */
+#lfgr-report .fb-tre{width:100%;background:#6b8fc4}
+#lfgr-report .fb-bra{width:89%;background:#203B92}
+#lfgr-report .fb-sh{width:76%;background:#B0BC36}
+#lfgr-report .fb-law{width:44%;background:#5db0ff}
+#lfgr-report .fb-fjg{width:42%;background:#314867}
+#lfgr-report .fb-far{width:36%;background:#5B1F69}
+#lfgr-report .sw-o{background:#5db0ff}
+#lfgr-report .sw-c{background:#bcd0ec}
+#lfgr-report .kval-msp.dim{color:var(--dim)}
+#lfgr-report .pie{width:150px;height:150px;line-height:0}
+#lfgr-report .pie svg{width:100%;height:auto;display:block}
+
+/* ===== digital polish (CSS only) ===== */
+#lfgr-report .rpt-hdr{overflow:visible}
+/* atom: perpetual spin + breathing neon glow */
+#lfgr-report .rpt-hdr .atom{position:absolute;top:16px;right:5%;width:74px;height:auto;z-index:1;opacity:.92;transform-origin:50% 50%;animation:lf-spin 22s linear infinite,lf-atomglow 4.5s ease-in-out infinite}
+@keyframes lf-spin{to{transform:rotate(360deg)}}
+@keyframes lf-atomglow{0%,100%{filter:drop-shadow(0 0 3px rgba(93,176,255,.35))}50%{filter:drop-shadow(0 0 14px rgba(93,176,255,.9))}}
+/* header: soft breathing glow pool (replaces flat sheen) */
+#lfgr-report .rpt-hdr::before{content:"";position:absolute;left:0;right:0;top:-30%;height:170%;pointer-events:none;z-index:0;background:radial-gradient(46% 80% at 50% 0,rgba(93,176,255,.18),transparent 72%);animation:lf-breathe 6.5s ease-in-out infinite}
+#lfgr-report .rpt-hdr .logo{position:relative;z-index:1}
+@keyframes lf-breathe{0%,100%{opacity:.4}50%{opacity:1}}
+/* title underline: flowing gradient shimmer */
+#lfgr-report .divider{width:120px;height:2px;opacity:1;border-radius:2px;background:linear-gradient(90deg,transparent,#5db0ff 30%,#7ee7c7 50%,#5db0ff 70%,transparent);background-size:220% 100%;animation:lf-flow 3.6s linear infinite}
+@keyframes lf-flow{to{background-position:-220% 0}}
+/* cards: glass depth + hairline top highlight */
+#lfgr-report .summary,#lfgr-report .card,#lfgr-report .kpi{position:relative;box-shadow:0 8px 24px -14px rgba(0,0,0,.7)}
+#lfgr-report .summary::before,#lfgr-report .card::before{content:"";position:absolute;left:16px;right:16px;top:0;height:1px;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(93,176,255,.55),transparent)}
+/* kpi: subtle glow off the accent edge + slow breathing accent */
+#lfgr-report .kpi{box-shadow:-2px 0 14px -5px rgba(93,176,255,.4),0 8px 24px -16px rgba(0,0,0,.7);overflow:hidden}
+#lfgr-report .kpi::after{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#5db0ff,#7ee7c7);opacity:.9;animation:lf-edge 5s ease-in-out infinite}
+@keyframes lf-edge{0%,100%{opacity:.55}50%{opacity:1}}
+/* section rule lines: fade to a cyan tip */
+#lfgr-report .sec .r{background:linear-gradient(90deg,rgba(120,160,230,.28),rgba(93,176,255,.05))}
+@media(prefers-reduced-motion:reduce){#lfgr-report *{animation:none!important}}
+</style></head><body><div id="lfgr-report">
+<img class="rpt-bg" src="https://raw.githubusercontent.com/JohnMcCormack1/Halo-Assets/main/lfgr-report-bg.png" alt="">
+<div class="rpt-hdr"><img class="atom" src="https://raw.githubusercontent.com/JohnMcCormack1/Halo-Assets/main/itservices-atom.png" alt=""><img class="logo" src="https://raw.githubusercontent.com/JohnMcCormack1/Halo-Assets/main/lfgr-report-logo.png" alt="Lawfront IT Services"></div>
+<div class="wrap">
+  <div class="rpt-title">Management Report</div><div class="divider"></div>
+  <div class="rpt-meta">
+    <div><div class="mlab">Reporting month</div><div class="mval">June 2026</div></div>
+    <div><div class="mlab">Compared with</div><div class="mval">Jan–May 2026 average</div></div>
+    <div><div class="mlab">Period</div><div class="mval">1 Jan – 1 Jul 2026</div></div>
+  </div>
+  <div class="summary"><h2>At a glance</h2>
+    <p>Across all firms, June saw <b>2,937</b> tickets raised and <b>2,805</b> closed. The report covers all Lawfront Group (LFGR) firms plus MSP-managed <b>Nelsons</b> (Quiss) and <b>Trethowans</b> (AMS). The chart below breaks this down by firm; per-firm detail follows. <b>FSP</b> goes live on Halo this month (currently zero tickets in).</p>
+    <p><span class="good">Doing well:</span> for the <b>LFGR in-house IT desk</b> (not the MSP-managed firms), first-contact resolution reached <b>87.3%</b> — above the 85% target. In-house priority SLA (P1–P3) rose to <b>86.6%</b> from a 72.1% baseline, its strongest month this year.</p>
+    <p><span class="watch">To improve:</span> <b>156</b> tickets have been open over 30 days and need clearing down. SLA excludes routine P4 tickets while agents are upskilled in triage (P4 will become reportable in the SLA metric in time). <b>This affects SLA only — first-time fix already includes all ticket priorities.</b></p>
+  </div>
+  <div class="charts">
+    <div class="card"><div class="ctitle">Tickets opened vs closed — June</div><div class="cnote">All Lawfront Group</div>
+      <div class="pierow"><div class="piewrap"><div class="pie"><svg viewBox="0 0 150 150" width="150" height="150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M75.0,75.0 L70.29,149.85 A75.0,75.0 0 0 1 75.00,0.00 Z" fill="#bcd0ec"/><path d="M75.0,75.0 L75.00,0.00 A75.0,75.0 0 1 1 70.29,149.85 Z" fill="#5db0ff"/><text x="116.2" y="76.3" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="700" fill="#06122e">51%</text><text x="33.8" y="73.7" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="700" fill="#06122e">49%</text></svg></div></div>
+        <div class="legend">
+          <div class="lgrow"><span class="sw sw-o"></span><span class="ll">Opened</span><span class="lv">2,937</span></div>
+          <div class="lgrow"><span class="sw sw-c"></span><span class="ll">Closed</span><span class="lv">2,805</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="card"><div class="ctitle">Tickets raised this month, by firm</div><div class="cnote">All firms. Nelsons MSP feed &amp; FSP Halo go-live pending; Trethowans is MSP-delivered.</div><div class="frow"><span class="fname">Trethowans</span><span class="fbarwrap"><span class="fbar fb-tre"></span></span><span class="fval">757</span></div><div class="frow"><span class="fname">Brachers</span><span class="fbarwrap"><span class="fbar fb-bra"></span></span><span class="fval">674</span></div><div class="frow"><span class="fname">Slater Heelis</span><span class="fbarwrap"><span class="fbar fb-sh"></span></span><span class="fval">577</span></div><div class="frow"><span class="fname">Lawfront</span><span class="fbarwrap"><span class="fbar fb-law"></span></span><span class="fval">333</span></div><div class="frow"><span class="fname">FJG</span><span class="fbarwrap"><span class="fbar fb-fjg"></span></span><span class="fval">319</span></div><div class="frow"><span class="fname">Farleys</span><span class="fbarwrap"><span class="fbar fb-far"></span></span><span class="fval">276</span></div><div class="frow"><span class="fname">Nelsons</span><span class="fpending">pending data from MSP</span></div><div class="frow"><span class="fname">FSP</span><span class="fpending">pending go-live</span></div></div>
+  </div>
+  <div class="sec"><h3>Lawfront Group (LFGR)</h3><span class="r"></span></div>
+  <div class="subnote">Hubs: Lawfront, Farleys, Brachers, Slater Heelis, FJG · Teams: IT Services, IT Services Leads, Education, Infrastructure, Applications. SLA covers priority tickets (P1–P3); P4 excluded while agents are upskilled in triage (P4 included would read ~97%). First-time fix is IT Services first-line, all priorities.</div>
+  <div class="grid"><div class="kpi"><div class="kname">Tickets opened this month</div><div class="ksub">Raised by users</div><div class="kval">2,180</div><div class="kdelta neutral"><span class="knorm">June</span></div></div><div class="kpi"><div class="kname">Tickets closed this month</div><div class="ksub">Resolved &amp; completed</div><div class="kval">2,086</div><div class="kdelta neutral"><span class="knorm">June</span></div></div><div class="kpi"><div class="kname">SLA compliance</div><div class="ksub">Priority tickets (P1–P3), within target</div><div class="kval">86.6%</div><div class="kdelta good">▲ 14.5 pts</div><div class="kdelta"><span class="knorm">vs 72.1% norm</span></div></div><div class="kpi"><div class="kname">First-time fix</div><div class="ksub">First contact · IT Services first-line</div><div class="kval">87.3%</div><div class="kdelta good">▲ 2.1 pts</div><div class="kdelta"><span class="knorm">vs 85.2% norm</span></div></div><div class="kpi"><div class="kname">Ageing tickets</div><div class="ksub">Opened &gt;30 days ago, still unresolved</div><div class="kval">156</div></div></div>
+  <div class="sec"><h3>Trethowans</h3><span class="tag">◆ Externally managed by MSP</span><span class="r"></span></div>
+  <div class="subnote">External managed-service provider. Volume and ageing shown for June; ageing reflects customer-facing service tickets only (internal admin items excluded). SLA and first-time fix are held on the MSP's own platform.</div>
+  <div class="grid"><div class="kpi"><div class="kname">Tickets opened this month</div><div class="ksub">Raised by users</div><div class="kval">757</div><div class="kdelta neutral"><span class="knorm">June</span></div></div><div class="kpi"><div class="kname">Tickets closed this month</div><div class="ksub">Resolved &amp; completed</div><div class="kval">719</div><div class="kdelta neutral"><span class="knorm">June</span></div></div><div class="kpi"><div class="kname">SLA compliance</div><div class="ksub">Priority tickets, within target</div><div class="kval-msp">Managed by MSP<br>— Not tracked</div></div><div class="kpi"><div class="kname">First-time fix</div><div class="ksub">Sorted on first contact</div><div class="kval-msp">Managed by MSP<br>— Not tracked</div></div><div class="kpi"><div class="kname">Ageing tickets</div><div class="ksub">Opened &gt;30 days ago, still unresolved</div><div class="kval">25</div><div class="kdelta neutral"><span class="knorm">Customer-facing</span></div></div></div>
+  <div class="sec"><h3>Nelsons</h3><span class="tag">◆ Externally managed by MSP</span><span class="r"></span></div>
+  <div class="subnote">External managed-service provider. Volume and ageing pending the MSP data feed; SLA and first-time fix are held on the MSP's own platform.</div>
+  <div class="grid"><div class="kpi"><div class="kname">Tickets opened this month</div><div class="ksub">Raised by users</div><div class="kval-msp dim">pending data from MSP</div></div><div class="kpi"><div class="kname">Tickets closed this month</div><div class="ksub">Resolved &amp; completed</div><div class="kval-msp dim">pending data from MSP</div></div><div class="kpi"><div class="kname">SLA compliance</div><div class="ksub">Priority tickets, within target</div><div class="kval-msp">Managed by MSP<br>— Not tracked</div></div><div class="kpi"><div class="kname">First-time fix</div><div class="ksub">Sorted on first contact</div><div class="kval-msp">Managed by MSP<br>— Not tracked</div></div><div class="kpi"><div class="kname">Ageing tickets</div><div class="ksub">Opened &gt;30 days ago, still unresolved</div><div class="kval-msp dim">pending data from MSP</div></div></div>
+</div>
+<div class="rpt-foot"><span>Lawfront IT Services · Group Service Management</span><span>Source: HaloITSM + MSP exports · 1 Jan – 1 Jul 2026</span></div>
+</div><script>function fit(){try{window.frameElement.style.height=document.documentElement.scrollHeight+"px";}catch(e){}}addEventListener("load",fit);addEventListener("resize",fit);setTimeout(fit,400);setTimeout(fit,1200);</script></body></html>
