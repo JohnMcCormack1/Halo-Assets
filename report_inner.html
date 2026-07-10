@@ -1,113 +1,432 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0;background:#04091c}
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
-/* Optional — make the report fill the widget edge-to-edge.
-   Change widget-1 to YOUR widget number (shown in this CSS box hint, e.g. #widget-49). */
-#widget-1.widget{padding:0 !important;background:#04091c !important;overflow:hidden !important}
-#lfgr-report{position:relative;overflow:hidden;isolation:isolate;--panel:rgba(12,28,58,.60);--line:rgba(120,160,230,.22);--soft:#c7d6ee;--dim:#8ea3c6;--good:#41dba6;--amber:#ffc960;--blue:#5db0ff;
- font-family:'IBM Plex Sans',system-ui,sans-serif;color:#e4ecfa;line-height:1.4;position:relative;border-radius:12px;overflow:hidden;padding:0 0 34px;
- background:#04091c;}
-#lfgr-report *{box-sizing:border-box}
-#lfgr-report .rpt-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;pointer-events:none}
-#lfgr-report .rpt-hdr{position:relative;height:118px;display:flex;align-items:center;justify-content:center}
-#lfgr-report .rpt-hdr .logo{width:270px;max-width:56%;height:auto;display:block}
-#lfgr-report .rpt-hdr .atom{position:absolute;top:16px;right:5%;width:74px;height:auto;opacity:.9}
-#lfgr-report .wrap{max-width:1080px;margin:0 auto;padding:0 30px;position:relative}
-#lfgr-report .rpt-title{font-family:'Fraunces',serif;font-weight:600;font-size:30px;text-align:center;color:#fff;margin:2px 0 4px}
-#lfgr-report .divider{width:60px;height:3px;border-radius:2px;background:var(--blue);margin:8px auto 16px;opacity:.85}
-#lfgr-report .rpt-meta{display:flex;gap:34px;flex-wrap:wrap;justify-content:center;margin-bottom:26px}
-#lfgr-report .rpt-meta>div{text-align:center}
-#lfgr-report .rpt-meta .mlab{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim);margin-bottom:3px}
-#lfgr-report .rpt-meta .mval{font-size:14px;font-weight:600;color:#fff}
-#lfgr-report .summary,#lfgr-report .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;backdrop-filter:blur(3px)}
-#lfgr-report .summary{padding:20px 24px;margin-bottom:22px}
-#lfgr-report .summary h2{font-family:'Fraunces',serif;font-size:19px;color:#fff;font-weight:600;margin:0 0 11px}
-#lfgr-report .summary p{font-size:13px;color:var(--soft);margin:0 0 10px;line-height:1.62}
-#lfgr-report .summary p:last-child{margin-bottom:0}
-#lfgr-report .summary b{color:#fff;font-weight:600}
-#lfgr-report .good{color:var(--good);font-weight:600}#lfgr-report .watch{color:var(--amber);font-weight:600}
-#lfgr-report .charts{display:grid;grid-template-columns:1.05fr 1fr;gap:16px;margin-bottom:26px}
-#lfgr-report .card{padding:16px 20px}
-#lfgr-report .ctitle{font-size:15px;font-weight:600;color:#fff;margin-bottom:3px}
-#lfgr-report .cnote{font-size:11.5px;color:var(--dim);margin-bottom:14px}
-#lfgr-report .pierow{display:flex;align-items:center;gap:16px}
-#lfgr-report .piewrap{flex:0 0 150px;width:150px}
-#lfgr-report .legend{flex:1;display:flex;flex-direction:column;gap:9px;min-width:0}
-#lfgr-report .lgrow{display:flex;align-items:center;gap:9px;font-size:13px}
-#lfgr-report .sw{flex:0 0 13px;width:13px;height:13px;border-radius:3px}
-#lfgr-report .ll{color:var(--soft);flex:1}
-#lfgr-report .lv{font-weight:600;color:#fff;font-variant-numeric:tabular-nums}
-#lfgr-report .frow{display:flex;align-items:center;gap:12px;margin-bottom:9px}
-#lfgr-report .frow:last-child{margin-bottom:0}
-#lfgr-report .fname{flex:0 0 96px;font-size:12.5px;color:var(--soft)}
-#lfgr-report .fbarwrap{flex:1;height:15px;background:rgba(120,160,230,.10);border-radius:5px;overflow:hidden}
-#lfgr-report .fbar{display:block;height:100%;border-radius:5px}
-#lfgr-report .fval{flex:0 0 46px;text-align:right;font-size:13px;font-weight:600;color:#fff;font-variant-numeric:tabular-nums}
-#lfgr-report .fpending{flex:1;text-align:right;font-size:11.5px;font-style:italic;color:var(--dim)}
-#lfgr-report .sec{display:flex;align-items:center;gap:12px;margin:26px 0 4px}
-#lfgr-report .sec h3{font-family:'Fraunces',serif;font-weight:600;font-size:20px;color:#fff;margin:0}
-#lfgr-report .sec .tag{font-size:11px;font-weight:600;color:var(--amber);border:1px solid rgba(255,201,96,.4);background:rgba(255,201,96,.08);padding:3px 10px;border-radius:20px;white-space:nowrap}
-#lfgr-report .sec .r{flex:1;height:1px;background:var(--line)}
-#lfgr-report .subnote{font-size:11.5px;color:var(--dim);margin:0 0 14px;line-height:1.5;max-width:none}
-#lfgr-report .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
-#lfgr-report .kpi{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:9px;padding:13px 15px;min-height:118px;display:flex;flex-direction:column}
-#lfgr-report .kname{font-size:12.5px;font-weight:600;color:#fff}
-#lfgr-report .ksub{font-size:10.5px;color:var(--dim);margin:2px 0 8px;line-height:1.35}
-#lfgr-report .kval{font-family:'Fraunces',serif;font-size:30px;font-weight:600;color:#fff;margin-top:auto}
-#lfgr-report .kval-msp{font-size:13px;font-weight:600;color:var(--amber);margin-top:auto;line-height:1.35}
-#lfgr-report .kdelta{font-size:11px;font-weight:600;margin-top:6px;color:var(--soft)}
-#lfgr-report .kdelta.good{color:var(--good)}#lfgr-report .kdelta.neutral{color:var(--dim)}
-#lfgr-report .knorm{color:var(--dim);font-weight:500}
-#lfgr-report .rpt-foot{max-width:1080px;margin:30px auto 0;padding:14px 30px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:11px;color:var(--dim)}
-@media(max-width:860px){#lfgr-report .charts{grid-template-columns:1fr}#lfgr-report .grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){#lfgr-report .grid{grid-template-columns:1fr}#lfgr-report .rpt-hdr .logo{max-width:74%}}
-
-/* inline-style replacements (widget strips inline styles) */
-#lfgr-report .fb-tre{width:100%;background:#6b8fc4}
-#lfgr-report .fb-bra{width:89%;background:#203B92}
-#lfgr-report .fb-sh{width:76%;background:#B0BC36}
-#lfgr-report .fb-law{width:44%;background:#5db0ff}
-#lfgr-report .fb-fjg{width:42%;background:#314867}
-#lfgr-report .fb-far{width:36%;background:#5B1F69}
-#lfgr-report .sw-o{background:#5db0ff}
-#lfgr-report .sw-c{background:#bcd0ec}
-#lfgr-report .kval-msp.dim{color:var(--dim)}
-#lfgr-report .pie{width:150px;height:150px;line-height:0}
-#lfgr-report .pie svg{width:100%;height:auto;display:block}
-</style></head><body><div id="lfgr-report">
-<img class="rpt-bg" src="https://raw.githubusercontent.com/JohnMcCormack1/Halo-Assets/main/lfgr-report-bg.png" alt="">
-<div class="rpt-hdr"><img class="atom" src="https://raw.githubusercontent.com/JohnMcCormack1/Halo-Assets/main/itservices-atom.png" alt=""><img class="logo" src="https://raw.githubusercontent.com/JohnMcCormack1/Halo-Assets/main/lfgr-report-logo.png" alt="Lawfront IT Services"></div>
-<div class="wrap">
-  <div class="rpt-title">Management Report</div><div class="divider"></div>
-  <div class="rpt-meta">
-    <div><div class="mlab">Reporting month</div><div class="mval">June 2026</div></div>
-    <div><div class="mlab">Compared with</div><div class="mval">Jan–May 2026 average</div></div>
-    <div><div class="mlab">Period</div><div class="mval">1 Jan – 1 Jul 2026</div></div>
-  </div>
-  <div class="summary"><h2>At a glance</h2>
-    <p>Across all firms, June saw <b>2,937</b> tickets raised and <b>2,805</b> closed. The report covers all Lawfront Group (LFGR) firms plus MSP-managed <b>Nelsons</b> (Quiss) and <b>Trethowans</b> (AMS). The chart below breaks this down by firm; per-firm detail follows. <b>FSP</b> goes live on Halo this month (currently zero tickets in).</p>
-    <p><span class="good">Doing well:</span> for the <b>LFGR in-house IT desk</b> (not the MSP-managed firms), first-contact resolution reached <b>87.3%</b> — above the 85% target. In-house priority SLA (P1–P3) rose to <b>86.6%</b> from a 72.1% baseline, its strongest month this year.</p>
-    <p><span class="watch">To improve:</span> <b>156</b> tickets have been open over 30 days and need clearing down. SLA excludes routine P4 tickets while agents are upskilled in triage (P4 will become reportable in the SLA metric in time). <b>This affects SLA only — first-time fix already includes all ticket priorities.</b></p>
-  </div>
-  <div class="charts">
-    <div class="card"><div class="ctitle">Tickets opened vs closed — June</div><div class="cnote">All Lawfront Group</div>
-      <div class="pierow"><div class="piewrap"><div class="pie"><svg viewBox="0 0 150 150" width="150" height="150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M75.0,75.0 L70.29,149.85 A75.0,75.0 0 0 1 75.00,0.00 Z" fill="#bcd0ec"/><path d="M75.0,75.0 L75.00,0.00 A75.0,75.0 0 1 1 70.29,149.85 Z" fill="#5db0ff"/><text x="116.2" y="76.3" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="700" fill="#06122e">51%</text><text x="33.8" y="73.7" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="700" fill="#06122e">49%</text></svg></div></div>
-        <div class="legend">
-          <div class="lgrow"><span class="sw sw-o"></span><span class="ll">Opened</span><span class="lv">2,937</span></div>
-          <div class="lgrow"><span class="sw sw-c"></span><span class="ll">Closed</span><span class="lv">2,805</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="card"><div class="ctitle">Tickets raised this month, by firm</div><div class="cnote">All firms. Nelsons MSP feed &amp; FSP Halo go-live pending; Trethowans is MSP-delivered.</div><div class="frow"><span class="fname">Trethowans</span><span class="fbarwrap"><span class="fbar fb-tre"></span></span><span class="fval">757</span></div><div class="frow"><span class="fname">Brachers</span><span class="fbarwrap"><span class="fbar fb-bra"></span></span><span class="fval">674</span></div><div class="frow"><span class="fname">Slater Heelis</span><span class="fbarwrap"><span class="fbar fb-sh"></span></span><span class="fval">577</span></div><div class="frow"><span class="fname">Lawfront</span><span class="fbarwrap"><span class="fbar fb-law"></span></span><span class="fval">333</span></div><div class="frow"><span class="fname">FJG</span><span class="fbarwrap"><span class="fbar fb-fjg"></span></span><span class="fval">319</span></div><div class="frow"><span class="fname">Farleys</span><span class="fbarwrap"><span class="fbar fb-far"></span></span><span class="fval">276</span></div><div class="frow"><span class="fname">Nelsons</span><span class="fpending">pending data from MSP</span></div><div class="frow"><span class="fname">FSP</span><span class="fpending">pending go-live</span></div></div>
-  </div>
-  <div class="sec"><h3>Lawfront Group (LFGR)</h3><span class="r"></span></div>
-  <div class="subnote">Hubs: Lawfront, Farleys, Brachers, Slater Heelis, FJG · Teams: IT Services, IT Services Leads, Education, Infrastructure, Applications. SLA covers priority tickets (P1–P3); P4 excluded while agents are upskilled in triage (P4 included would read ~97%). First-time fix is IT Services first-line, all priorities.</div>
-  <div class="grid"><div class="kpi"><div class="kname">Tickets opened this month</div><div class="ksub">Raised by users</div><div class="kval">2,180</div><div class="kdelta neutral"><span class="knorm">June</span></div></div><div class="kpi"><div class="kname">Tickets closed this month</div><div class="ksub">Resolved &amp; completed</div><div class="kval">2,086</div><div class="kdelta neutral"><span class="knorm">June</span></div></div><div class="kpi"><div class="kname">SLA compliance</div><div class="ksub">Priority tickets (P1–P3), within target</div><div class="kval">86.6%</div><div class="kdelta good">▲ 14.5 pts</div><div class="kdelta"><span class="knorm">vs 72.1% norm</span></div></div><div class="kpi"><div class="kname">First-time fix</div><div class="ksub">First contact · IT Services first-line</div><div class="kval">87.3%</div><div class="kdelta good">▲ 2.1 pts</div><div class="kdelta"><span class="knorm">vs 85.2% norm</span></div></div><div class="kpi"><div class="kname">Ageing tickets</div><div class="ksub">Opened &gt;30 days ago, still unresolved</div><div class="kval">156</div></div></div>
-  <div class="sec"><h3>Trethowans</h3><span class="tag">◆ Externally managed by MSP</span><span class="r"></span></div>
-  <div class="subnote">External managed-service provider. Volume and ageing shown for June; ageing reflects customer-facing service tickets only (internal admin items excluded). SLA and first-time fix are held on the MSP's own platform.</div>
-  <div class="grid"><div class="kpi"><div class="kname">Tickets opened this month</div><div class="ksub">Raised by users</div><div class="kval">757</div><div class="kdelta neutral"><span class="knorm">June</span></div></div><div class="kpi"><div class="kname">Tickets closed this month</div><div class="ksub">Resolved &amp; completed</div><div class="kval">719</div><div class="kdelta neutral"><span class="knorm">June</span></div></div><div class="kpi"><div class="kname">SLA compliance</div><div class="ksub">Priority tickets, within target</div><div class="kval-msp">Managed by MSP<br>— Not tracked</div></div><div class="kpi"><div class="kname">First-time fix</div><div class="ksub">Sorted on first contact</div><div class="kval-msp">Managed by MSP<br>— Not tracked</div></div><div class="kpi"><div class="kname">Ageing tickets</div><div class="ksub">Opened &gt;30 days ago, still unresolved</div><div class="kval">25</div><div class="kdelta neutral"><span class="knorm">Customer-facing</span></div></div></div>
-  <div class="sec"><h3>Nelsons</h3><span class="tag">◆ Externally managed by MSP</span><span class="r"></span></div>
-  <div class="subnote">External managed-service provider. Volume and ageing pending the MSP data feed; SLA and first-time fix are held on the MSP's own platform.</div>
-  <div class="grid"><div class="kpi"><div class="kname">Tickets opened this month</div><div class="ksub">Raised by users</div><div class="kval-msp dim">pending data from MSP</div></div><div class="kpi"><div class="kname">Tickets closed this month</div><div class="ksub">Resolved &amp; completed</div><div class="kval-msp dim">pending data from MSP</div></div><div class="kpi"><div class="kname">SLA compliance</div><div class="ksub">Priority tickets, within target</div><div class="kval-msp">Managed by MSP<br>— Not tracked</div></div><div class="kpi"><div class="kname">First-time fix</div><div class="ksub">Sorted on first contact</div><div class="kval-msp">Managed by MSP<br>— Not tracked</div></div><div class="kpi"><div class="kname">Ageing tickets</div><div class="ksub">Opened &gt;30 days ago, still unresolved</div><div class="kval-msp dim">pending data from MSP</div></div></div>
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>End of Month IT Services Report</title>
+<style>
+:root{--text:#e9eefb;--soft:#b9c6e0;--dim:#8394b6;--line:rgba(120,160,230,.18);
+--panel:rgba(14,26,52,.62);--good:#57d08b;--watch:#ffc960;--bad:#ff7a6a;}
+*{box-sizing:border-box}
+body{margin:0;color:var(--text);font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+background:linear-gradient(rgba(6,14,33,.55),rgba(6,14,33,.72)),url('https://raw.githubusercontent.com/JohnMcCormack1/Halo-Assets/main/lfgr-report-bg.png') center top/cover fixed #08122a;}
+.wrap{max-width:1060px;margin:0 auto;padding:30px 26px 44px;}
+.brandrow{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:14px;}
+.brandrow img.atom{height:30px} .brandrow img.logo{height:24px}
+h1.title{font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:30px;text-align:center;
+margin:4px 0 14px;letter-spacing:.2px;color:#fff;}
+.meta{display:flex;justify-content:center;gap:46px;margin-bottom:24px;}
+.meta .mi{text-align:center}
+.meta .ml{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:5px}
+.meta .mv{font-size:14px;font-weight:600;color:var(--text)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:0 0 18px;
+backdrop-filter:blur(6px);box-shadow:0 18px 50px -30px rgba(0,0,0,.7);}
+.summary h2{font-family:Georgia,serif;font-size:20px;margin:0 0 10px;color:#fff}
+.summary p{font-size:12.5px;line-height:1.6;color:var(--soft);margin:0 0 9px}
+.summary p:last-child{margin-bottom:0} .summary b{color:var(--text)}
+.good{color:var(--good);font-weight:700} .watch{color:var(--watch);font-weight:700}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.ctitle{font-size:15px;font-weight:700;color:#fff;margin-bottom:2px}
+.cnote{font-size:11px;color:var(--dim);margin-bottom:12px}
+.piewrap{display:flex;align-items:center;gap:14px} .piewrap svg{width:150px;height:150px;flex:none}
+.legend{flex:1;display:flex;flex-direction:column;gap:7px}
+.lgrow{display:flex;align-items:center;gap:9px;font-size:12px}
+.sw{width:11px;height:11px;border-radius:3px;flex:none}
+.ll{color:var(--soft);flex:1} .lv{color:var(--text);font-weight:700;font-variant-numeric:tabular-nums}
+.sec{display:flex;align-items:center;gap:14px;margin:26px 2px 12px}
+.sec h3{font-family:Georgia,serif;font-weight:700;font-size:19px;color:#fff;margin:0}
+.sec .rule{flex:1;height:1px;background:var(--line)}
+.tag{font-size:10.5px;padding:3px 9px;border-radius:20px;background:rgba(255,201,96,.16);color:var(--watch);font-weight:600}
+.tag.grey{background:rgba(150,170,210,.14);color:var(--soft)}
+.subnote{font-size:11px;color:var(--dim);line-height:1.5;margin:0 2px 12px}
+.kgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-left:3px solid #5db0ff;border-radius:11px;
+padding:12px 13px;min-height:118px;display:flex;flex-direction:column;backdrop-filter:blur(6px)}
+.kpi.watch{border-left-color:var(--watch)}
+.kname{font-size:12px;font-weight:700;color:#fff} .ksub{font-size:9.5px;color:var(--dim);margin:3px 0 auto;line-height:1.35}
+.kval{font-size:26px;font-weight:800;color:#fff;line-height:1.1;margin-top:6px}
+.kval.txt{font-size:12.5px;font-weight:700;color:var(--soft);line-height:1.35}
+.kval .ast{color:var(--watch);font-size:14px;vertical-align:super}
+.kdelta{font-size:10px;margin-top:5px} .kdelta.good{color:var(--good)} .kdelta.bad{color:var(--bad)}
+.kdelta.neutral{color:var(--dim)}
+.ptbl{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;margin-top:2px}
+.ptbl th,.ptbl td{padding:7px 9px;font-size:11.5px;text-align:center}
+.ptbl thead th{background:#2a5aa8;color:#fff;font-weight:600;font-size:11px;border:1px solid rgba(120,160,230,.35)}
+.ptbl thead th.blank{background:transparent;border:none}
+.ptbl tbody td{border:1px solid var(--line);color:var(--text)}
+.ptbl td.firm{text-align:left;font-weight:600;padding-left:4px;color:var(--text);border:none;white-space:nowrap}
+.ptbl td.gt{font-style:italic;color:var(--soft)}
+.ptbl td.pppcm{background:rgba(255,201,96,.16);color:#ffd97a;font-weight:700}
+.ptbl td.pending{color:var(--dim);font-style:italic;background:rgba(120,160,230,.06)}
+.ptbl tr.group td{background:rgba(150,180,235,.14);color:#fff;font-weight:700}
+.ptbl tr.group td.firm{background:transparent} .ptbl tr.group td.gt{color:#dfe9fb}
+.ptbl tr.group td.pppcm{background:rgba(255,201,96,.62);color:#3a2a00}
+.mtag{font-size:8.5px;color:var(--dim);font-weight:400}
+footer{display:flex;justify-content:space-between;font-size:10.5px;color:var(--dim);
+border-top:1px solid var(--line);padding-top:12px;margin-top:26px}
+@media(max-width:720px){.grid2{grid-template-columns:1fr}.kgrid{grid-template-columns:1fr 1fr}.meta{gap:24px}}
+</style></head><body><div class="wrap">
+<div class="brandrow"><img class="atom" src="https://raw.githubusercontent.com/JohnMcCormack1/Halo-Assets/main/itservices-atom.png" alt=""><img class="logo" src="https://raw.githubusercontent.com/JohnMcCormack1/Halo-Assets/main/lfgr-report-logo.png" alt="Lawfront IT Services"></div>
+<h1 class="title">End of Month IT Services Report</h1>
+<div class="meta">
+<div class="mi"><div class="ml">Reporting month</div><div class="mv">June 2026</div></div>
+<div class="mi"><div class="ml">Period</div><div class="mv">1 Jan – 1 Jul 2026</div></div>
 </div>
-<div class="rpt-foot"><span>Lawfront IT Services · Group Service Management</span><span>Source: HaloITSM + MSP exports · 1 Jan – 1 Jul 2026</span></div>
-</div><script>function fit(){try{window.frameElement.style.height=document.documentElement.scrollHeight+"px";}catch(e){}}addEventListener("load",fit);addEventListener("resize",fit);setTimeout(fit,400);setTimeout(fit,1200);</script></body></html>
+<div class="card summary"><h2>At a glance</h2><p>Across all firms, June saw <b>3,428</b> tickets raised and <b>3,227</b> closed. The report covers all Lawfront Group (LFGR) firms plus MSP-managed <b>Nelsons</b> (Quiss) and <b>Trethowans</b> (AMS), on the service desk&rsquo;s Halo dashboard scope: the five core IT teams, tickets logged in-month, with spam and no-action notifications excluded. <b>FSP</b> goes live on Halo this month (currently zero tickets in).</p><p><span class="good">Doing well:</span> priority-ticket SLA (P1–P3) for the LFGR in-house desk is strong at <b>83.1%</b>, the ageing backlog is low at <b>38</b> tickets open beyond 30 days, and the desk closed almost as many tickets as it logged.</p><p><span class="watch">To improve:</span> first-time fix for the IT Services team, from the desk&rsquo;s own SQL reporting, was <b>63.2%</b> in June across <b>1,852</b> resolved tickets — below the <b>85%</b> target and the clearest focus area this month. SLA excludes routine P4 tickets while agents are upskilled in triage (P4 would read ~97%); first-time fix already includes all priorities.</p></div>
+<div class="grid2">
+  <div class="card"><div class="ctitle">Tickets opened vs closed — June</div><div class="cnote">All services (LFGR + MSPs)</div>
+    <div class="piewrap"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="144.144pt" height="144.144pt" viewBox="0 0 144.144 144.144" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-07-10T15:08:17.702776</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 144.144 
+L 144.144 144.144 
+L 144.144 0 
+L 0 0 
+L 0 144.144 
+z
+" style="fill: none; opacity: 0"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 66.609362 129.470246 
+C 74.375998 130.209406 82.212464 129.364554 89.643086 126.986987 
+C 97.073709 124.609419 103.945035 120.748231 109.839984 115.637792 
+C 115.734933 110.527354 120.531759 104.273202 123.939301 97.254967 
+C 127.346843 90.236732 129.294732 82.599343 129.664726 74.806391 
+C 130.03472 67.01344 128.81918 59.225866 126.091895 51.916359 
+C 123.364609 44.606853 119.181887 37.926366 113.797632 32.280414 
+C 108.413378 26.634461 101.938768 22.139628 94.766828 19.068759 
+C 87.594886 15.99789 79.873727 14.4144 72.071997 14.4144 
+L 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+z
+" style="fill: #5db0ff; stroke: #0b1a33; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 72.072001 14.4144 
+C 57.25866 14.4144 43.000537 20.12314 32.280421 30.346357 
+C 21.560304 40.569574 15.181793 54.540932 14.479274 69.337604 
+C 13.776755 84.134275 18.802892 98.647107 28.506211 109.839991 
+C 38.20953 121.032876 51.862656 128.066789 66.609362 129.470246 
+L 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+z
+" style="fill: #c3d2ee; stroke: #0b1a33; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="matplotlib.axis_1"/>
+   <g id="matplotlib.axis_2"/>
+   <g id="text_1">
+    <!-- 52% -->
+    <g style="fill: #08152b" transform="translate(91.114218 76.9692) scale(0.12 -0.12)">
+     <defs>
+      <path id="DejaVuSans-Bold-35" d="M 678 4666 
+L 3669 4666 
+L 3669 3781 
+L 1638 3781 
+L 1638 3059 
+Q 1775 3097 1914 3117 
+Q 2053 3138 2203 3138 
+Q 3056 3138 3531 2711 
+Q 4006 2284 4006 1522 
+Q 4006 766 3489 337 
+Q 2972 -91 2053 -91 
+Q 1656 -91 1267 -14 
+Q 878 63 494 219 
+L 494 1166 
+Q 875 947 1217 837 
+Q 1559 728 1863 728 
+Q 2300 728 2551 942 
+Q 2803 1156 2803 1522 
+Q 2803 1891 2551 2103 
+Q 2300 2316 1863 2316 
+Q 1603 2316 1309 2248 
+Q 1016 2181 678 2041 
+L 678 4666 
+z
+" transform="scale(0.015625)"/>
+      <path id="DejaVuSans-Bold-32" d="M 1844 884 
+L 3897 884 
+L 3897 0 
+L 506 0 
+L 506 884 
+L 2209 2388 
+Q 2438 2594 2547 2791 
+Q 2656 2988 2656 3200 
+Q 2656 3528 2436 3728 
+Q 2216 3928 1850 3928 
+Q 1569 3928 1234 3808 
+Q 900 3688 519 3450 
+L 519 4475 
+Q 925 4609 1322 4679 
+Q 1719 4750 2100 4750 
+Q 2938 4750 3402 4381 
+Q 3866 4013 3866 3353 
+Q 3866 2972 3669 2642 
+Q 3472 2313 2841 1759 
+L 1844 884 
+z
+" transform="scale(0.015625)"/>
+      <path id="DejaVuSans-Bold-25" d="M 4959 1925 
+Q 4738 1925 4616 1733 
+Q 4494 1541 4494 1184 
+Q 4494 825 4614 633 
+Q 4734 441 4959 441 
+Q 5184 441 5303 633 
+Q 5422 825 5422 1184 
+Q 5422 1541 5301 1733 
+Q 5181 1925 4959 1925 
+z
+M 4959 2450 
+Q 5541 2450 5875 2112 
+Q 6209 1775 6209 1184 
+Q 6209 594 5875 251 
+Q 5541 -91 4959 -91 
+Q 4378 -91 4042 251 
+Q 3706 594 3706 1184 
+Q 3706 1772 4042 2111 
+Q 4378 2450 4959 2450 
+z
+M 2094 -91 
+L 1403 -91 
+L 4319 4750 
+L 5013 4750 
+L 2094 -91 
+z
+M 1453 4750 
+Q 2034 4750 2367 4411 
+Q 2700 4072 2700 3481 
+Q 2700 2891 2367 2550 
+Q 2034 2209 1453 2209 
+Q 872 2209 539 2550 
+Q 206 2891 206 3481 
+Q 206 4072 539 4411 
+Q 872 4750 1453 4750 
+z
+M 1453 4225 
+Q 1228 4225 1106 4031 
+Q 984 3838 984 3481 
+Q 984 3122 1106 2926 
+Q 1228 2731 1453 2731 
+Q 1678 2731 1798 2926 
+Q 1919 3122 1919 3481 
+Q 1919 3838 1797 4031 
+Q 1675 4225 1453 4225 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#DejaVuSans-Bold-35"/>
+     <use xlink:href="#DejaVuSans-Bold-32" transform="translate(69.580078 0)"/>
+     <use xlink:href="#DejaVuSans-Bold-25" transform="translate(139.160156 0)"/>
+    </g>
+   </g>
+   <g id="text_2">
+    <!-- 48% -->
+    <g style="fill: #08152b" transform="translate(24.306657 73.7973) scale(0.12 -0.12)">
+     <defs>
+      <path id="DejaVuSans-Bold-34" d="M 2356 3675 
+L 1038 1722 
+L 2356 1722 
+L 2356 3675 
+z
+M 2156 4666 
+L 3494 4666 
+L 3494 1722 
+L 4159 1722 
+L 4159 850 
+L 3494 850 
+L 3494 0 
+L 2356 0 
+L 2356 850 
+L 288 850 
+L 288 1881 
+L 2156 4666 
+z
+" transform="scale(0.015625)"/>
+      <path id="DejaVuSans-Bold-38" d="M 2228 2088 
+Q 1891 2088 1709 1903 
+Q 1528 1719 1528 1375 
+Q 1528 1031 1709 848 
+Q 1891 666 2228 666 
+Q 2563 666 2741 848 
+Q 2919 1031 2919 1375 
+Q 2919 1722 2741 1905 
+Q 2563 2088 2228 2088 
+z
+M 1350 2484 
+Q 925 2613 709 2878 
+Q 494 3144 494 3541 
+Q 494 4131 934 4440 
+Q 1375 4750 2228 4750 
+Q 3075 4750 3515 4442 
+Q 3956 4134 3956 3541 
+Q 3956 3144 3739 2878 
+Q 3522 2613 3097 2484 
+Q 3572 2353 3814 2058 
+Q 4056 1763 4056 1313 
+Q 4056 619 3595 264 
+Q 3134 -91 2228 -91 
+Q 1319 -91 855 264 
+Q 391 619 391 1313 
+Q 391 1763 633 2058 
+Q 875 2353 1350 2484 
+z
+M 1631 3419 
+Q 1631 3141 1786 2991 
+Q 1941 2841 2228 2841 
+Q 2509 2841 2662 2991 
+Q 2816 3141 2816 3419 
+Q 2816 3697 2662 3845 
+Q 2509 3994 2228 3994 
+Q 1941 3994 1786 3844 
+Q 1631 3694 1631 3419 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#DejaVuSans-Bold-34"/>
+     <use xlink:href="#DejaVuSans-Bold-38" transform="translate(69.580078 0)"/>
+     <use xlink:href="#DejaVuSans-Bold-25" transform="translate(139.160156 0)"/>
+    </g>
+   </g>
+  </g>
+ </g>
+</svg>
+<div class="legend"><div class="lgrow"><span class="sw" style="background:#5db0ff"></span><span class="ll">Opened</span><span class="lv">3,428</span></div><div class="lgrow"><span class="sw" style="background:#c3d2ee"></span><span class="ll">Closed</span><span class="lv">3,227</span></div></div></div></div>
+  <div class="card"><div class="ctitle">Tickets resolved by team — June</div><div class="cnote">Each team&rsquo;s share of resolutions</div>
+    <div class="piewrap"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="144.144pt" height="144.144pt" viewBox="0 0 144.144 144.144" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-07-10T15:08:17.732908</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 144.144 
+L 144.144 144.144 
+L 144.144 0 
+L 0 0 
+L 0 144.144 
+z
+" style="fill: none; opacity: 0"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 46.249199 123.62374 
+C 54.027416 127.51993 62.587502 129.605677 71.286174 129.724246 
+C 79.984846 129.84281 88.598603 127.991148 96.480124 124.308409 
+C 104.361645 120.625669 111.308425 115.206471 116.798418 108.458072 
+C 122.288412 101.709673 126.180564 93.805456 128.182378 85.339424 
+C 130.184188 76.873391 130.244233 68.063066 128.357987 59.570537 
+C 126.471745 51.07801 122.687683 43.12148 117.290173 36.298884 
+C 111.892664 29.476288 105.020384 23.962918 97.189787 20.173102 
+C 89.359191 16.383287 80.771477 14.4144 72.071997 14.4144 
+L 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+z
+" style="fill: #5db0ff; stroke: #0b1a33; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 28.537419 109.875956 
+C 31.005213 112.717837 33.745356 115.311258 36.71861 117.619082 
+C 39.691865 119.926907 42.883969 121.938061 46.249199 123.62374 
+L 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+z
+" style="fill: #3f8fe0; stroke: #0b1a33; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 23.682156 103.421989 
+C 24.414719 104.552726 25.186685 105.657431 25.996641 106.734085 
+C 26.806597 107.810739 27.654046 108.858673 28.537419 109.875956 
+L 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+z
+" style="fill: #1d4e8f; stroke: #0b1a33; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 25.962924 37.454777 
+C 18.876691 46.893418 14.856657 58.284114 14.448832 70.07972 
+C 14.041007 81.875325 17.264736 93.516468 23.682156 103.421989 
+L 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+z
+" style="fill: #ffc960; stroke: #0b1a33; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 72.072001 14.4144 
+C 63.126135 14.4144 54.301824 16.496391 46.299416 20.495138 
+C 38.297007 24.493885 31.333961 30.300722 25.962924 37.454777 
+L 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+C 72.072 72.072 72.072 72.072 72.072 72.072 
+z
+" style="fill: #f0a93a; stroke: #0b1a33; stroke-width: 1.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="matplotlib.axis_1"/>
+   <g id="matplotlib.axis_2"/>
+  </g>
+ </g>
+</svg>
+<div class="legend"><div class="lgrow"><span class="sw" style="background:#5db0ff"></span><span class="ll">IT Services</span><span class="lv">1,852</span></div><div class="lgrow"><span class="sw" style="background:#3f8fe0"></span><span class="ll">IT Services Leads</span><span class="lv">201</span></div><div class="lgrow"><span class="sw" style="background:#1d4e8f"></span><span class="ll">Other IT teams</span><span class="lv">72</span></div><div class="lgrow"><span class="sw" style="background:#ffc960"></span><span class="ll">Trethowans (MSP)</span><span class="lv">626</span></div><div class="lgrow"><span class="sw" style="background:#f0a93a"></span><span class="ll">Nelsons (MSP)</span><span class="lv">476</span></div></div></div></div>
+</div>
+<div class="card"><div class="ctitle">IT Service Delivery — PPPCM</div><div class="cnote">June 2026 · basis: logged in-month · Lawfront Group + MSPs.</div><table class="ptbl"><thead><tr><th class="blank"></th><th>Incident</th><th>Request</th><th>Grand Total</th><th>Average PD</th><th>PPPCM</th></tr></thead><tbody><tr class=""><td class="firm">Slater Heelis</td><td>255</td><td>322</td><td class="gt">577</td><td>26.2</td><td class="pppcm">3.75</td></tr><tr class=""><td class="firm">Brachers</td><td>320</td><td>354</td><td class="gt">674</td><td>30.6</td><td class="pppcm">3.70</td></tr><tr class=""><td class="firm">FJG</td><td>201</td><td>118</td><td class="gt">319</td><td>14.5</td><td class="pppcm">2.98</td></tr><tr class=""><td class="firm">Trethowans<span class="mtag"> (MSP)</span></td><td>278</td><td>479</td><td class="gt">757</td><td>34.4</td><td class="pppcm">2.94</td></tr><tr class=""><td class="firm">Nelsons<span class="mtag"> (MSP)</span></td><td>372</td><td>118</td><td class="gt">490</td><td>22.3</td><td class="pppcm">2.17</td></tr><tr class=""><td class="firm">Lawfront</td><td>117</td><td>216</td><td class="gt">333</td><td>15.1</td><td class="pppcm">1.73</td></tr><tr class=""><td class="firm">Farleys</td><td>186</td><td>90</td><td class="gt">276</td><td>12.5</td><td class="pppcm">1.67</td></tr><tr><td class="firm" style="color:var(--dim);font-style:italic">Field Seymour Parkes</td><td colspan="5" class="pending">pending go-live — not yet in Halo</td></tr><tr class="group"><td class="firm">Group</td><td>1,729</td><td>1,697</td><td class="gt">3,426</td><td>155.7</td><td class="pppcm">2.67</td></tr></tbody></table></div>
+<div class="sec"><h3>Lawfront Group (LFGR)</h3><span class="rule"></span></div>
+<div class="subnote">Aligned to the service desk&rsquo;s Halo dashboard: teams IT Services, IT Services Leads, Infrastructure, Applications and Education; tickets logged in-month; spam and no-action notifications excluded. Opened/closed are the Halo counters (closed reconciles exactly; opened is within two tickets of the row-level export). Routine P4 tickets are excluded from the SLA measure whilst agents are upskilled in triage; including P4 would read ~97%.</div>
+<div class="kgrid"><div class="kpi "><div class="kname">Tickets opened this month</div><div class="ksub">Logged in June (Halo counter)</div><div class="kval">2,181</div><div class="kdelta neutral">June · Halo</div></div><div class="kpi "><div class="kname">Tickets closed this month</div><div class="ksub">Logged in June, now resolved/closed</div><div class="kval">2,125</div><div class="kdelta neutral">June · Halo</div></div><div class="kpi "><div class="kname">SLA compliance</div><div class="ksub">Priority tickets (P1–P3), within target</div><div class="kval">83.1%</div><div class="kdelta good">strong · core desk scope</div></div><div class="kpi watch"><div class="kname">First-time fix</div><div class="ksub">IT Services team · 1,852 resolved · target 85%</div><div class="kval">63.2%</div><div class="kdelta bad">▼ 21.8 pts vs 85% target</div></div><div class="kpi watch"><div class="kname">Ageing tickets</div><div class="ksub">Opened &gt;30 days ago, still unresolved</div><div class="kval">38</div><div class="kdelta">&nbsp;</div></div></div>
+<div class="sec"><h3>Trethowans</h3><span class="tag">◆ Externally managed by MSP</span><span class="rule"></span></div>
+<div class="subnote">External managed-service provider. Volume, ageing and the incident/request split are shown; SLA and first-time fix are held on the MSP&rsquo;s own platform. Ageing counts current-year tickets open beyond 30 days.</div>
+<div class="kgrid"><div class="kpi "><div class="kname">Tickets opened this month</div><div class="ksub">Raised by users</div><div class="kval">757</div><div class="kdelta neutral">June</div></div><div class="kpi "><div class="kname">Tickets closed this month</div><div class="ksub">Resolved &amp; completed</div><div class="kval">626</div><div class="kdelta neutral">June</div></div><div class="kpi "><div class="kname">SLA compliance</div><div class="ksub">Priority tickets, within target</div><div class="kval txt">Managed by MSP<br>— Not tracked</div><div class="kdelta">&nbsp;</div></div><div class="kpi "><div class="kname">First-time fix</div><div class="ksub">Sorted on first contact</div><div class="kval txt">Managed by MSP<br>— Not tracked</div><div class="kdelta">&nbsp;</div></div><div class="kpi "><div class="kname">Ageing tickets</div><div class="ksub">Opened &gt;30 days ago, still unresolved</div><div class="kval">55</div><div class="kdelta">&nbsp;</div></div></div>
+<div class="sec"><h3>Nelsons</h3><span class="tag">◆ Externally managed by MSP</span><span class="rule"></span></div>
+<div class="subnote">External managed-service provider (Quiss). Reporting for the first time from a June ticket export. Opened volume and incident/request split are firm; closed is provisional (June-opened tickets) and ageing is not yet derivable. SLA &amp; first-time fix run on the MSP&rsquo;s platform.</div>
+<div class="kgrid"><div class="kpi "><div class="kname">Tickets opened this month</div><div class="ksub">Raised by users</div><div class="kval">490</div><div class="kdelta neutral">June</div></div><div class="kpi "><div class="kname">Tickets closed this month</div><div class="ksub">Of June-opened tickets (provisional)</div><div class="kval">476<span class='ast'>*</span></div><div class="kdelta neutral">June</div></div><div class="kpi "><div class="kname">SLA compliance</div><div class="ksub">Priority tickets, within target</div><div class="kval txt">Managed by MSP<br>— Not tracked</div><div class="kdelta">&nbsp;</div></div><div class="kpi "><div class="kname">First-time fix</div><div class="ksub">Sorted on first contact</div><div class="kval txt">Managed by MSP<br>— Not tracked</div><div class="kdelta">&nbsp;</div></div><div class="kpi "><div class="kname">Ageing tickets</div><div class="ksub">Opened &gt;30 days ago, still unresolved</div><div class="kval txt">Not available<span class="ast">*</span></div><div class="kdelta">&nbsp;</div></div></div>
+<div class="sec"><h3>Field Seymour Parkes</h3><span class="tag grey">Pending go-live</span><span class="rule"></span></div>
+<div class="subnote">Pending go-live — not yet feeding into service-management reporting. Figures will appear once the platform is live.</div>
+<div class="kgrid"><div class="kpi "><div class="kname">Tickets opened this month</div><div class="ksub">Raised by users</div><div class="kval txt">No data yet</div><div class="kdelta">&nbsp;</div></div><div class="kpi "><div class="kname">Tickets closed this month</div><div class="ksub">Resolved &amp; completed</div><div class="kval txt">No data yet</div><div class="kdelta">&nbsp;</div></div><div class="kpi "><div class="kname">SLA compliance</div><div class="ksub">Priority tickets, within target</div><div class="kval txt">No data yet</div><div class="kdelta">&nbsp;</div></div><div class="kpi "><div class="kname">First-time fix</div><div class="ksub">Sorted on first contact</div><div class="kval txt">No data yet</div><div class="kdelta">&nbsp;</div></div><div class="kpi "><div class="kname">Ageing tickets</div><div class="ksub">Opened &gt;30 days ago, still unresolved</div><div class="kval txt">No data yet</div><div class="kdelta">&nbsp;</div></div></div>
+<div class="card"><div class="ctitle">IT Service Delivery — PPPCM</div><div class="cnote">June 2026 · basis: tickets closed (dashboard basis) · Lawfront Group + MSPs.</div><table class="ptbl"><thead><tr><th class="blank"></th><th>Incident</th><th>Request</th><th>Grand Total</th><th>Average PD</th><th>PPPCM</th></tr></thead><tbody><tr class=""><td class="firm">Slater Heelis</td><td>263</td><td>308</td><td class="gt">571</td><td>26.0</td><td class="pppcm">3.72</td></tr><tr class=""><td class="firm">Brachers</td><td>328</td><td>340</td><td class="gt">668</td><td>30.4</td><td class="pppcm">3.66</td></tr><tr class=""><td class="firm">FJG</td><td>203</td><td>109</td><td class="gt">312</td><td>14.2</td><td class="pppcm">2.91</td></tr><tr class=""><td class="firm">Trethowans<span class="mtag"> (MSP)</span></td><td>255</td><td>371</td><td class="gt">626</td><td>28.5</td><td class="pppcm">2.43</td></tr><tr class=""><td class="firm">Nelsons<span class="mtag"> (MSP)</span></td><td>365</td><td>111</td><td class="gt">476</td><td>21.6</td><td class="pppcm">2.11</td></tr><tr class=""><td class="firm">Farleys</td><td>186</td><td>88</td><td class="gt">274</td><td>12.5</td><td class="pppcm">1.66</td></tr><tr class=""><td class="firm">Lawfront</td><td>109</td><td>190</td><td class="gt">299</td><td>13.6</td><td class="pppcm">1.56</td></tr><tr><td class="firm" style="color:var(--dim);font-style:italic">Field Seymour Parkes</td><td colspan="5" class="pending">pending go-live — not yet in Halo</td></tr><tr class="group"><td class="firm">Group</td><td>1,709</td><td>1,517</td><td class="gt">3,226</td><td>146.6</td><td class="pppcm">2.51</td></tr></tbody></table></div>
+<footer><span>Lawfront IT Services · Group Service Management</span><span>Source: HaloITSM + MSP exports · 1 Jan – 1 Jul 2026</span></footer>
+</div></body></html>
