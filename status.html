@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Service status</title>
+<!-- ============================================================
+     Halo-Assets: standard service status tile
+     Host on GitHub Pages, then point a Halo Iframe widget at:
+       https://<you>.github.io/Halo-Assets/status.html?service=netdocuments-uk
+     One widget per service; change ?service= for each tile.
+     To add a service, add an entry to the SERVICES object below.
+     ============================================================ -->
+<style>
+  :root {
+    --dot-operational: #1f9d55;
+    --dot-degraded:    #d9a406;
+    --dot-partial:     #e8730c;
+    --dot-major:       #d1382c;
+    --dot-maintenance: #2b6cb0;
+    --dot-unknown:     #8a8f98;
+    --surface: #ffffff;
+    --line:    #e4e6ea;
+    --ink:     #1c1f24;
+    --ink-dim: #61656d;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --surface:#1b1d21; --line:#2c2f36; --ink:#e8eaed; --ink-dim:#9aa0a8; }
+  }
+  html, body { margin: 0; height: 100%; background: transparent; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+  }
+  .card {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+    overflow: hidden;
+    height: calc(100% - 2px);
+    display: flex;
+    flex-direction: column;
+  }
+  .head {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  .name { font-weight: 600; font-size: 14px; }
+  .pill {
+    margin-left: auto;
+    font-size: 12px; font-weight: 600;
+    padding: 3px 10px; border-radius: 999px;
+    color: #fff; white-space: nowrap;
+  }
+  .rows { padding: 6px 14px; display: grid; gap: 2px; overflow: auto; flex: 1; }
+  .row { display: flex; align-items: center; gap: 8px; padding: 5px 0; font-size: 13px; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; flex: 0 0 auto; background: var(--dot-unknown); }
+  .comp { color: var(--ink); }
+  .state { margin-left: auto; color: var(--ink-dim); font-size: 12px; }
+  .foot { padding: 6px 14px 10px; font-size: 11px; color: var(--ink-dim); }
+  .msg { padding: 14px; font-size: 13px; color: var(--ink-dim); }
+  .msg.err { color: var(--dot-major); }
+</style>
+</head>
+<body>
+<div class="card" id="card"><div class="msg">Loading…</div></div>
+
+<script>
+(function () {
+  // ---- Service registry: add a line per service ----------------------
+  var SERVICES = {
+    "netdocuments-uk": {
+      name: "NetDocuments UK",
+      platform: "statuspage",
+      base: "https://trust-eu.netdocuments.com"
+    }
+    // "clio-europe": { name: "Clio (Europe)", platform: "incidentio", ... }  // added in the next step
+  };
+
+  var POLL_SECONDS = 60;
+
+  var INDICATOR = {
+    none:        { label: "All systems operational", color: "var(--dot-operational)" },
+    minor:       { label: "Minor issue",             color: "var(--dot-degraded)" },
+    major:       { label: "Major issue",             color: "var(--dot-partial)" },
+    critical:    { label: "Critical outage",         color: "var(--dot-major)" },
+    maintenance: { label: "Under maintenance",       color: "var(--dot-maintenance)" }
+  };
+  var COMP = {
+    operational:          { label: "Operational",   color: "var(--dot-operational)" },
+    degraded_performance: { label: "Degraded",       color: "var(--dot-degraded)" },
+    partial_outage:       { label: "Partial outage", color: "var(--dot-partial)" },
+    major_outage:         { label: "Major outage",   color: "var(--dot-major)" },
+    under_maintenance:    { label: "Maintenance",    color: "var(--dot-maintenance)" }
+  };
+
+  var card = document.getElementById("card");
+
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  function message(text, isErr) {
+    card.innerHTML = "";
+    card.appendChild(el("div", "msg" + (isErr ? " err" : ""), text));
+  }
+
+  // ---- Platform adapter: return a normalised shape -------------------
+  // { overall: {label,color}, components: [{name,label,color}] }
+  function fetchStatuspage(svc) {
+    return fetch(svc.base + "/api/v2/summary.json", { cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(function (data) {
+        var ind = (data.status && data.status.indicator) || "none";
+        var meta = INDICATOR[ind] || INDICATOR.none;
+        var comps = (data.components || []).filter(function (c) { return !c.group; })
+          .map(function (c) {
+            var cm = COMP[c.status] || { label: c.status, color: "var(--dot-unknown)" };
+            return { name: c.name, label: cm.label, color: cm.color };
+          });
+        return {
+          overall: { label: (data.status && data.status.description) || meta.label, color: meta.color },
+          components: comps
+        };
+      });
+  }
+
+  function fetchStatus(svc) {
+    if (svc.platform === "statuspage") return fetchStatuspage(svc);
+    // incident.io adapter added in the next step
+    return Promise.reject(new Error("platform '" + svc.platform + "' not wired up yet"));
+  }
+
+  // ---- Render --------------------------------------------------------
+  function render(svc, model) {
+    card.innerHTML = "";
+    var head = el("div", "head");
+    head.appendChild(el("span", "name", svc.name));
+    var pill = el("span", "pill", model.overall.label);
+    pill.style.background = model.overall.color;
+    head.appendChild(pill);
+    card.appendChild(head);
+
+    var rows = el("div", "rows");
+    model.components.forEach(function (c) {
+      var row = el("div", "row");
+      var dot = el("span", "dot"); dot.style.background = c.color;
+      row.appendChild(dot);
+      row.appendChild(el("span", "comp", c.name));
+      row.appendChild(el("span", "state", c.label));
+      rows.appendChild(row);
+    });
+    card.appendChild(rows);
+
+    var when = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    card.appendChild(el("div", "foot", "Checked " + when));
+  }
+
+  // ---- Boot ----------------------------------------------------------
+  var key = new URLSearchParams(location.search).get("service");
+  var svc = key && SERVICES[key];
+
+  if (!svc) {
+    message("No service selected. Add ?service=" +
+      Object.keys(SERVICES).join(" or ?service=") + " to the URL.", true);
+    return;
+  }
+
+  function refresh() {
+    fetchStatus(svc)
+      .then(function (model) { render(svc, model); })
+      .catch(function (err) { message(svc.name + ": status unavailable — " + err.message, true); });
+  }
+  refresh();
+  setInterval(refresh, POLL_SECONDS * 1000);
+})();
+</script>
+</body>
+</html>
